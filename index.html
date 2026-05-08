@@ -190,7 +190,28 @@
       border: 1.5px solid var(--line);
       border-radius: 14px;
       background: var(--bg-2);
+      position: relative;
+      cursor: default;
     }
+    .noise-tip {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--fg);
+      color: var(--bg);
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 8px 12px;
+      border-radius: 8px;
+      width: 190px;
+      text-align: center;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+      z-index: 100;
+    }
+    .noise-card:hover .noise-tip { opacity: 1; }
     .noise-card .label {
       font-size: 13px;
       font-weight: 600;
@@ -321,12 +342,12 @@
   <div class="section-label">Colored noise</div>
   <h2 class="section-title">Six types of noise,<br>one for every need</h2>
   <div class="noises-grid">
-    <div class="noise-card"><div class="noise-dot dot-white"></div><span class="label">White</span></div>
-    <div class="noise-card"><div class="noise-dot dot-pink"></div><span class="label">Pink</span></div>
-    <div class="noise-card"><div class="noise-dot dot-brown"></div><span class="label">Brown</span></div>
-    <div class="noise-card"><div class="noise-dot dot-violet"></div><span class="label">Violet</span></div>
-    <div class="noise-card"><div class="noise-dot dot-gray"></div><span class="label">Gray</span></div>
-    <div class="noise-card"><div class="noise-dot dot-blue"></div><span class="label">Blue</span></div>
+    <div class="noise-card"><div class="noise-dot dot-white"></div><span class="label">White</span><span class="noise-tip">Equal power at all frequencies — like a fan or TV static. Masks distractions, shortens sleep onset.</span></div>
+    <div class="noise-card"><div class="noise-dot dot-pink"></div><span class="label">Pink</span><span class="noise-tip">Softer than white noise — like steady rain or ocean waves. Boosts deep sleep and memory.</span></div>
+    <div class="noise-card"><div class="noise-dot dot-brown"></div><span class="label">Brown</span><span class="noise-tip">Deep bass rumble like thunder or a waterfall. Calms anxiety, deepens sleep and focus.</span></div>
+    <div class="noise-card"><div class="noise-dot dot-violet"></div><span class="label">Violet</span><span class="noise-tip">High-frequency sharp hiss. Used for tinnitus relief and intense cognitive focus.</span></div>
+    <div class="noise-card"><div class="noise-dot dot-gray"></div><span class="label">Gray</span><span class="noise-tip">Perceptually flat — equally loud at all frequencies. The easiest on the ears for long sessions.</span></div>
+    <div class="noise-card"><div class="noise-dot dot-blue"></div><span class="label">Blue</span><span class="noise-tip">Brighter than white noise — a light airy hiss. Keeps you alert during monotonous tasks.</span></div>
   </div>
 </section>
 
