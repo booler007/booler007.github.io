@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>White Noise Sounds — Ambient sounds for focus and sleep</title>
+  <meta name="description" content="White noise, pink noise, brown noise and nature sounds to help you focus, relax and sleep better." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent:      #A8C5E2;
+      --accent-soft: #cfdef0;
+      --accent-dark: #7aaacf;
+      --bg:          #fafaf7;
+      --bg-2:        #f1efe9;
+      --fg:          #2b2b2b;
+      --muted:       #888;
+      --line:        #d6d3cd;
+      --line-soft:   #e7e4dd;
+    }
+    .dark {
+      --bg:        #1f1d1a;
+      --bg-2:      #181614;
+      --fg:        #ece9e1;
+      --muted:     #8a857c;
+      --line:      #3a3733;
+      --line-soft: #2a2724;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      transition: background 0.25s, color 0.25s;
+      min-height: 100vh;
+    }
+
+    /* ── Nav ─────────────────────────────────────────── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--fg);
+    }
+    .nav-icon {
+      width: 32px;
+      height: 32px;
+    }
+    .theme-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid var(--line);
+      background: transparent;
+      color: var(--fg);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .theme-btn:hover { background: var(--accent); border-color: var(--fg); }
+
+    /* ── Hero ────────────────────────────────────────── */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 80px 24px 72px;
+      gap: 28px;
+    }
+    .hero-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 24px;
+      border: 1.5px solid var(--line);
+      background: var(--bg-2);
+      padding: 16px;
+    }
+    .hero h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(36px, 6vw, 58px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      max-width: 680px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent-dark);
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 520px;
+    }
+    .install-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--fg);
+      color: var(--bg);
+      border: 1.5px solid var(--fg);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s, transform 0.1s;
+    }
+    .install-btn:hover {
+      background: var(--accent);
+      color: var(--fg);
+      border-color: var(--fg);
+    }
+    .install-btn:active { transform: scale(0.98); }
+    .install-btn svg { flex-shrink: 0; }
+
+    .hero-note {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ── Divider ─────────────────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 1.5px solid var(--fg);
+      margin: 0 48px;
+    }
+
+    /* ── Noises grid ─────────────────────────────────── */
+    section {
+      padding: 64px 48px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 48px;
+      line-height: 1.2;
+    }
+
+    .noises-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 48px;
+    }
+    @media (min-width: 640px) {
+      .noises-grid { grid-template-columns: repeat(6, 1fr); }
+    }
+    .noise-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 18px 10px;
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      background: var(--bg-2);
+    }
+    .noise-card .label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .noise-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+    }
+    .dot-white  { background: radial-gradient(circle, #e0ddd7, #b0ada7); }
+    .dot-pink   { background: radial-gradient(circle, #f7c5d5, #e89ab0); }
+    .dot-brown  { background: radial-gradient(circle, #b07040, #7a4a20); }
+    .dot-violet { background: radial-gradient(circle, #c8a8e2, #9070c0); }
+    .dot-gray   { background: radial-gradient(circle, #b0ada7, #808080); }
+    .dot-blue   { background: radial-gradient(circle, #A8C5E2, #5a90c0); }
+
+    /* ── Tracks section ──────────────────────────────── */
+    .tracks-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    @media (min-width: 600px) {
+      .tracks-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 860px) {
+      .tracks-grid { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    .track-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      background: var(--bg);
+    }
+    .track-card .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      color: #1a2330;
+    }
+    .track-card .meta .title {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .track-card .meta .sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── CTA bottom ──────────────────────────────────── */
+    .cta {
+      text-align: center;
+      padding: 64px 24px 80px;
+      border-top: 1px dashed var(--line);
+    }
+    .cta p {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(22px, 3.5vw, 32px);
+      font-weight: 600;
+      font-style: italic;
+      max-width: 500px;
+      margin: 0 auto 28px;
+      line-height: 1.3;
+    }
+
+    /* ── Footer ──────────────────────────────────────── */
+    footer {
+      border-top: 1px dashed var(--line);
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      nav    { padding: 16px 20px; }
+      section { padding: 48px 20px; }
+      .divider { margin: 0 20px; }
+      footer { padding: 20px; }
+    }
+  </style>
+</head>
+<body id="page">
+
+<!-- Nav -->
+<nav>
+  <a class="nav-brand" href="#">
+    <img class="nav-icon" src="icon128.png" alt="White Noise Sounds icon" />
+    White Noise Sounds
+  </a>
+  <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+      <path id="themeIcon" d="M21 13a9 9 0 11-10-10 7 7 0 0010 10z"/>
+    </svg>
+  </button>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <img class="hero-icon" src="icon128.png" alt="White Noise Sounds" />
+  <h1>Sounds for <em>focus,</em><br><em>rest</em> and <em>sleep</em></h1>
+  <p>White noise, nature sounds and ambient tracks — always at hand, right in your browser.</p>
+  <a class="install-btn" href="#" id="installBtn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9L6 12l1.41-1.41L9 12.17V8h2v8zm4-3h-2V8h2v5zm1 3h-2v-2h2v2z"/>
+    </svg>
+    Add to Chrome — it's free
+  </a>
+  <span class="hero-note">Chrome extension · No account needed</span>
+</div>
+
+<hr class="divider" />
+
+<!-- Noises -->
+<section>
+  <div class="section-label">Colored noise</div>
+  <h2 class="section-title">Six types of noise,<br>one for every need</h2>
+  <div class="noises-grid">
+    <div class="noise-card"><div class="noise-dot dot-white"></div><span class="label">White</span></div>
+    <div class="noise-card"><div class="noise-dot dot-pink"></div><span class="label">Pink</span></div>
+    <div class="noise-card"><div class="noise-dot dot-brown"></div><span class="label">Brown</span></div>
+    <div class="noise-card"><div class="noise-dot dot-violet"></div><span class="label">Violet</span></div>
+    <div class="noise-card"><div class="noise-dot dot-gray"></div><span class="label">Gray</span></div>
+    <div class="noise-card"><div class="noise-dot dot-blue"></div><span class="label">Blue</span></div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Tracks -->
+<section>
+  <div class="section-label">Nature sounds</div>
+  <h2 class="section-title">25 ambient tracks</h2>
+  <div class="tracks-grid">
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 3 4 4 4 8a4 4 0 11-8 0c0-2 2-3 2-5 0-1 1-2 2-3zM4 19h16l-2 3H6l-2-3z"/></svg></div>
+      <div class="meta"><div class="title">Bonfire in a Forest</div><div class="sub">fire · forest · river</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2 12Q4.5 8 7 12Q9.5 16 12 12Q14.5 8 17 12Q19.5 16 22 12M2 17Q4.5 13 7 17Q9.5 21 12 17Q14.5 13 17 17Q19.5 21 22 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="meta"><div class="title">Clouds at Sea</div><div class="sub">sea · wind</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 11l5-5 5 5v9H3zM13 13l4-4 4 4v7h-8z"/></svg></div>
+      <div class="meta"><div class="title">Countryside</div><div class="sub">birds · fields</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 7c3 0 3 3 6 3s3-3 6-3 3 3 6 3M3 13c3 0 3 3 6 3s3-3 6-3 3 3 6 3M3 19c3 0 3 0 6 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="meta"><div class="title">Creek</div><div class="sub">water · winter</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2 4 5 6 5 11a5 5 0 01-10 0c0-3 2-4 2-7 0-1 1-2 3-4z"/></svg></div>
+      <div class="meta"><div class="title">Fireplace</div><div class="sub">fire · warmth</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2l5 8H9v5H5v-5H2zM16 6l5 8h-3v5h-4v-5h-3z"/></svg></div>
+      <div class="meta"><div class="title">Forest</div><div class="sub">birds · nature</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4C20 4 8 5 5 12c-1 3-1 7 2 9 0-3 2-5 4-6-1 3-1 6 1 8 4-3 6-7 5-12 2 1 3 4 3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="meta"><div class="title">Greenwood</div><div class="sub">forest · summer</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 14a4 4 0 010-8 5 5 0 0110 1 4 4 0 010 8H6zm1 3l-1 4h2l1-4zm4 0l-1 4h2l1-4zm4 0l-1 4h2l1-4z"/></svg></div>
+      <div class="meta"><div class="title">Light Night Rain</div><div class="sub">rain · night</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c4 6 6 9 6 13a6 6 0 01-12 0c0-4 2-7 6-13z"/></svg></div>
+      <div class="meta"><div class="title">Morning Lake</div><div class="sub">calm · morning</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 13a9 9 0 11-10-10 7 7 0 0010 10z"/></svg></div>
+      <div class="meta"><div class="title">Night Forest</div><div class="sub">owl · darkness</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 13a9 9 0 11-10-10 7 7 0 0010 10z"/></svg></div>
+      <div class="meta"><div class="title">Night Outdoors</div><div class="sub">stars · breeze</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2 12Q4.5 8 7 12Q9.5 16 12 12Q14.5 8 17 12Q19.5 16 22 12M2 17Q4.5 13 7 17Q9.5 21 12 17Q14.5 13 17 17Q19.5 21 22 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="meta"><div class="title">Quiet Lake</div><div class="sub">lake · summer</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 14a4 4 0 010-8 5 5 0 0110 1 4 4 0 010 8H6zm1 3l-1 4h2l1-4zm4 0l-1 4h2l1-4zm4 0l-1 4h2l1-4z"/></svg></div>
+      <div class="meta"><div class="title">Rainy Day</div><div class="sub">rain · calm</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 7c3 0 3 3 6 3s3-3 6-3 3 3 6 3M3 13c3 0 3 3 6 3s3-3 6-3 3 3 6 3M3 19c3 0 3 0 6 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="meta"><div class="title">Riverside</div><div class="sub">water · birds</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2 12Q4.5 8 7 12Q9.5 16 12 12Q14.5 8 17 12Q19.5 16 22 12M2 17Q4.5 13 7 17Q9.5 21 12 17Q14.5 13 17 17Q19.5 21 22 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="meta"><div class="title">Sea Sunset</div><div class="sub">waves · evening</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4C20 4 8 5 5 12c-1 3-1 7 2 9 0-3 2-5 4-6-1 3-1 6 1 8 4-3 6-7 5-12 2 1 3 4 3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="meta"><div class="title">Spring Meadow</div><div class="sub">birds · meadow</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2v20M2 12h20M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="meta"><div class="title">Spring Forest</div><div class="sub">birds · spring</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2v20M2 12h20M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="meta"><div class="title">Snowfall</div><div class="sub">winter · quiet</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 8h12a2 2 0 100-4M3 12h16a2 2 0 110 4M3 16h10a2 2 0 110 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="meta"><div class="title">Snowstorm</div><div class="sub">wind · winter</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="meta"><div class="title">Sunrise</div><div class="sub">birds · morning</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2l5 8H9v5H5v-5H2zM16 6l5 8h-3v5h-4v-5h-3z"/></svg></div>
+      <div class="meta"><div class="title">Sunset in a Forest</div><div class="sub">birds · evening</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c4 6 6 9 6 13a6 6 0 01-12 0c0-4 2-7 6-13z"/></svg></div>
+      <div class="meta"><div class="title">Sweet Summer Rain</div><div class="sub">rain · summer</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2 12Q4.5 8 7 12Q9.5 16 12 12Q14.5 8 17 12Q19.5 16 22 12M2 17Q4.5 13 7 17Q9.5 21 12 17Q14.5 13 17 17Q19.5 21 22 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="meta"><div class="title">Tropical Beach</div><div class="sub">waves · beach</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4C20 4 8 5 5 12c-1 3-1 7 2 9 0-3 2-5 4-6-1 3-1 6 1 8 4-3 6-7 5-12 2 1 3 4 3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="meta"><div class="title">Tropical Jungle</div><div class="sub">birds · tropics</div></div>
+    </div>
+
+    <div class="track-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2v20M2 12h20M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="meta"><div class="title">Winter Park</div><div class="sub">winter · trees</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <p>"The right background sound makes everything easier."</p>
+  <a class="install-btn" href="#" id="installBtn2">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9L6 12l1.41-1.41L9 12.17V8h2v8zm4-3h-2V8h2v5zm1 3h-2v-2h2v2z"/>
+    </svg>
+    Add to Chrome — it's free
+  </a>
+</div>
+
+<!-- Footer -->
+<footer>
+  <span>© 2026 White Noise Sounds</span>
+</footer>
+
+<script>
+  const page = document.getElementById('page');
+  const btn  = document.getElementById('themeBtn');
+  const icon = document.getElementById('themeIcon');
+
+  const SUN  = 'M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2';
+  const MOON = 'M21 13a9 9 0 11-10-10 7 7 0 0010 10z';
+
+  let dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  function applyTheme() {
+    page.classList.toggle('dark', dark);
+    icon.setAttribute('d', dark ? SUN : MOON);
+  }
+  applyTheme();
+
+  btn.addEventListener('click', () => { dark = !dark; applyTheme(); });
+</script>
+</body>
+</html>
